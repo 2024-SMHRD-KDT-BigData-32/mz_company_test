@@ -11,15 +11,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.smhrd.entity.Member;
 import com.smhrd.mapper.MemberMapper;
 
-/**
- * Handles requests for the application home page.
- */
 
 // Controller(POJO)를 찾기 위해서는
 // 1. servlet-context.xml 파일에서 어떤 패키지에서 찾을건지 명시하기
@@ -28,6 +27,8 @@ import com.smhrd.mapper.MemberMapper;
 public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
+	
+
 	
 	@Autowired
 	private MemberMapper mapper;
@@ -93,7 +94,9 @@ public class MemberController {
 		return "redirect:/showMember";
 		// 값을 하나만 받아올 때는 path variable 방식도 가능하다.
 	}
+	
 	//@RequestMapping(value = "/", method = RequestMethod.GET)
+	
 	@GetMapping("/") // Get 방식으로 '/'라고 요청이 들어오면 아래의 메서드를 실행.
 	public String main() {
 		return "Main";	// /WEB-INF/views/Main.jsp
