@@ -4,285 +4,317 @@
     pageEncoding="UTF-8"%>
 <!-- JSTL 사용 -> taglib Directive -->  
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-	<head>
-		<title>Forty by HTML5 UP</title>
-		<meta charset="utf-8" />
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="resources/assets/css/main.css" />
-		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	</head>
-	<body>
-	<%Member loginMember = (Member)session.getAttribute("loginMember"); %>
-		<!-- Wrapper -->
-			<div id="wrapper">
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>프로젝트 및 공모전 플랫폼</title>
+    <link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/style.css' />">
+  	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/styleguide.css' />">
+  	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/globals.css' />">
+  
+  </head>
+  <body>
+    <div class="main-before">
+      <div class="div">
 
-				<!-- Header -->
-					<header id="header" class="alt">
-						<a href="index.html" class="logo"><strong>Forty</strong> <span>by HTML5 UP</span></a>
-						<nav>
-							<!-- Q6. 로그인을 한 상태에서는 로그인탭 대신 로그아웃탭과 개인정보수정탭을 출력 -->
-							
-							<c:if test="${empty loginMember }">
-								<a href="#menu">로그인</a>
-							</c:if>
-																			
-							<c:if test="${not empty loginMember }">
-								<c:if test="${loginMember.email eq 'admin' }">
-									<a href="showMember">회원 전체조회</a>
-								</c:if>
-								<a href="goUpdateMember">회원정보 수정</a>
-								<a href="memberLogout">로그아웃</a>
-							</c:if>
-								
-							<!-- Q7. 개인정보수정 기능 만들기 -->
-							<!-- Q8. 로그아웃 기능 만들기 -->
-							<!-- Q9. 관리자 계정(admin)일 때는 회원정보관리 탭 만들기 -->
-						</nav>
-					</header>
-				<!-- Menu -->
-					<nav id="menu">	
-						<ul class="links">
-						<!-- Q3. 로그인 기능 만들기 -->
-							<li><h5>로그인</h5></li>
-								<form action="loginMember" method="post">
-									<li><input type="text"  name="email" placeholder="Email을 입력하세요"></li>
-									<li><input type="password"  name="pw" placeholder="PW를 입력하세요"></li>
-									<li><input type="submit" value="LogIn" class="button fit"></li>
-								</form>
-						</ul>
-						<ul class="actions vertical">
-						<!-- Q1. 회원가입 기능 만들기 -->
-							<li><h5>회원가입</h5></li>
-								<form action="joinMember" method="post">
-									<li><input type="text" id="inputE" name="email" placeholder="Email을 입력하세요"></li>
-									
-								    <li><input type="button" vlaue="Email 중복체크" onclick="checkE()"></li>
-									<li><span id="possibleEmail"></span></li>
-									
-									<li><input type="password" name="pw" placeholder="PW를 입력하세요"></li>
-									<li><input type="text" name="tel" placeholder="전화번호를 입력하세요"></li>
-									<li><input type="text" name="address" placeholder="집주소를 입력하세요"></li>
-									<li><input type="submit" value="JoinUs" class="button fit"></li>
-								</form>
-						</ul>
-					</nav>			
-				<!-- Banner -->
-					<section id="banner" class="major">
-						<div class="inner">
-							<header class="major">
-							<!-- Q4. 로그인 후 로그인한 사용자의 아이디로 바꾸기 -->
-							<!-- ex) smhrd님 환영합니다.  -->
-							<%if(loginMember == null){ %>
-										<h1>로그인한 세션아이디를 출력해주세요.</h1>
-							<%} else{ %>
-								<h1><%=loginMember.getEmail() %></h1>
-							<%} %>
-							
-							</header>
-							<div class="content">
-								<p>게시판을 이용해보세요 ^^<br></p>
-								<ul class="actions">
-									<li><a href="boardMain" class="button next scrolly">게시판 바로가기</a></li>
-								</ul>
-							</div>
-						</div>
-					</section>
+        <!-- header -->
+        <header class="header">
+            <nav class="nav-right">
+              <a href="#" class="btn-join"><span class="text-wrapper-9">회원가입</span></a>
+              <a href="#" class="btn-login"><span class="text-wrapper-10">로그인</span></a>
+            </nav>
+            <nav class="nav-left">
+              <a href="#" class="logo">
+                <img class="logo-symbol" src="img/logo-symbol.svg" alt="로고 심볼" />
+                <span class="logo-text">LOGOTITLE</span>
+              </a>
+              <ul class="div-3">
+                <li><a href="#" class="text-wrapper-11">프로젝트 찾기</a></li>
+                <li><a href="#" class="text-wrapper-11">공모전</a></li>
+              </ul>
+            </nav>
+          </header>
 
-				<!-- Main -->
-					<div id="main">
+        <!-- 배너 -->
+        <section class="banner">
+            <div class="frame-19">
+              <header class="frame-20">
+                <h2 class="banner-tit">나에게 딱 맞는 프로젝트를 찾아보아요.</h2>
+                <p class="banner-text">원하는 프로젝트와 공모전의 이름 또는 내용을 검색해보세요</p>
+              </header>
+              <form class="visual-search" role="search">
+                <div class="frame-21">
+                  <div class="div-3">
+                    <label for="search-type" class="visually-hidden">검색 유형</label>
+                    <select id="search-type" class="text-wrapper-8">
+                      <option value="project">프로젝트</option>
+                      <option value="contest">공모전</option>
+                    </select>
+                    <img src="./img/search_more_ico.svg">
+                    <label for="search-input" class="visually-hidden">검색어 입력</label>
+                    <input type="text" id="search-input" class="text-wrapper-8" placeholder="검색어를 입력하세요" />
+                  </div>
+                  <button type="submit" class="search-ico" aria-label="검색"><img src="./img/search_ico.svg"></button>
+                </div>
+              </form>
+            </div>
+        </section>
 
-						<!-- One -->
-							<section id="one" class="tiles">
-								<article>
-									<span class="image">
-										<img src="resources/images/pic01.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="#" class="link">HTML</a></h3>
-										<p>홈페이지를 만드는 기초 언어</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="resources/images/pic02.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="#" class="link">CSS</a></h3>
-										<p>HTML을 디자인해주는 언어</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="resources/images/pic03.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="#" class="link">Servlet/JSP</a></h3>
-										<p>Java를 기본으로 한 웹 프로그래밍 언어/스크립트 언어</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="resources/images/pic04.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="#" class="link">JavaScript</a></h3>
-										<p>HTML에 기본적인 로직을 정의할 수 있는 언어</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="resources/images/pic05.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="#" class="link">MVC</a></h3>
-										<p>웹 프로젝트 중 가장 많이 사용하는 디자인패턴</p>
-									</header>
-								</article>
-								<article>
-									<span class="image">
-										<img src="resources/images/pic06.jpg" alt="" />
-									</span>
-									<header class="major">
-										<h3><a href="#" class="link">Web Project</a></h3>
-										<p>여러분의 최종프로젝트에 웹 기술을 활용하세요!</p>
-									</header>
-								</article>
-							</section>
-					<!-- Two -->
-							<section id="two">
-								<div class="inner">
-									<header class="major">
-										<h2>나에게 온 메세지 확인하기</h2>
-									</header>
-									<p></p>
-									<ul class="actions">
-										<!-- Q12. 로그인 이메일 출력! -->
-										<!-- ex) smhrd님에게 온 메시지  -->
-										<li>로그인을 하세요.</li>
-										<!-- Q14. 메시지 전체 삭제 기능 -->								
-										<li><a href="#" class="button next scrolly">전체삭제하기</a></li>
-									</ul>
-									<!-- Q13. table형태로 나한테 온 메시지만 가져와서 보여주기
-											 번호, 보낸사람, 내용, 시간 -->
-									<!-- Q15. 메시지 개별 삭제 기능 -->								
-								</div>
-							</section>
+        <!-- 프로젝트 -->
+        <section class="prj">
+            <div class="prj_right_wrap">
+                <div>
+                    <h2 class="text-wrapper-3">어떤 프로젝트를 원하시나요?</h2>
+                    <p class="p">실력을 향상시킬 수 있는 다양한 프로젝트가 기다리고 있어요</p>
+                  </div>
+                  
+                  <div class="frame-12">
+                    <button class="frame-wrapper">
+                      <span class="text-wrapper-4">기술 스택</span>
+                      <img class="stack_more_ico" src="./img/search_more_ico.svg" alt="화살표 아이콘" />
+                    </button>
+                    <button href="#" class="frame-wrapper">
+                      <span class="text-wrapper-4">전체보기</span>
+                    </button>
+                  </div>
+            </div>
 
-					</div>
+            <div class="prj-box">
+                <div class="frame-13">
+                    <article class="prj-box-2">
+                        <div class="frame-14">
+                        <div class="frame-15">
+                            <header class="frame-16">
+                            <p class="prj-sub">공모전 프로젝트</p>
+                            <h3 class="prj-box-tit">신용카드 고객 세그먼트 분류 AI 경진대회 공모전 팀원을 구합니다</h3>
+                            </header>
+                            <ul class="div-2">
+                            <li class="prj-box-stack"><span class="text-wrapper-7">React</span></li>
+                            <li class="prj-box-stack"><span class="text-wrapper-7">Java</span></li>
+                            <li class="prj-box-stack"><span class="text-wrapper-7">Python</span></li>
+                            <li class="prj-box-stack"><span class="text-wrapper-7">Figma</span></li>
+                            </ul>
+                        </div>
+                        </div>
+                        <div class="frame-18">
+                        <time class="text-wrapper-5" datetime="2025-04-11">
+                            <img class="img" src="./img/calendar_ico.svg" alt="달력 아이콘" />
+                            마감일 2025.04.11
+                        </time>
+                        <button class="heart-ico" aria-label="좋아요"><img src="./img/heart_ico.svg"></button>
+                        </div>
+                  </article>
+                
+                <article class="prj-box-2">
+                  <div class="frame-14">
+                    <div class="frame-15">
+                      <header class="frame-16">
+                        <p class="prj-sub">공모전 프로젝트</p>
+                        <h3 class="prj-box-tit">신용카드 고객 세그먼트 분류 AI 경진대회 공모전 팀원을 구합니다</h3>
+                      </header>
+                      <ul class="div-2">
+                        <li class="prj-box-stack"><span class="text-wrapper-7">React</span></li>
+                        <li class="prj-box-stack"><span class="text-wrapper-7">Java</span></li>
+                        <li class="prj-box-stack"><span class="text-wrapper-7">Python</span></li>
+                        <li class="prj-box-stack"><span class="text-wrapper-7">Figma</span></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="frame-18">
+                    <time class="text-wrapper-5" datetime="2025-04-11">
+                      <img class="img" src="./img/calendar_ico.svg" alt="달력 아이콘" />
+                      마감일 2025.04.11
+                    </time>
+                    <button class="heart-ico" aria-label="좋아요"><img src="./img/heart_ico.svg"></button>
+                  </div>
+                </article>
 
-				<!-- Contact -->
-					<section id="contact">
-						<div class="inner">
-							<section>
-							<!-- Q11. 메시지 보내기 기능(메시지는 계속 확인하기 위해서 DB에 저장!) -->
-							<!-- 다른 사람의 DB에 메시지 저장해보기! -->
-								<form>
-								<div class="field half first">
-										<label for="name">Name</label>
-										<input type="text"  id="name" placeholder="보내는 사람 이름" />
-									</div>
-									<div class="field half">
-										<label for="email">Email</label>
-										<input type="text"  id="email" placeholder="받는 사람 이메일"/>
-									</div>
+                <article class="prj-box-2">
+                    <div class="frame-14">
+                      <div class="frame-15">
+                        <header class="frame-16">
+                          <p class="prj-sub">공모전 프로젝트</p>
+                          <h3 class="prj-box-tit">신용카드 고객 세그먼트 분류 AI 경진대회 공모전 팀원을 구합니다</h3>
+                        </header>
+                        <ul class="div-2">
+                          <li class="prj-box-stack"><span class="text-wrapper-7">React</span></li>
+                          <li class="prj-box-stack"><span class="text-wrapper-7">Java</span></li>
+                          <li class="prj-box-stack"><span class="text-wrapper-7">Python</span></li>
+                          <li class="prj-box-stack"><span class="text-wrapper-7">Figma</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="frame-18">
+                      <time class="text-wrapper-5" datetime="2025-04-11">
+                        <img class="img" src="./img/calendar_ico.svg" alt="달력 아이콘" />
+                        마감일 <span class="pjr_date">2025.04.11</span>
+                      </time>
+                      <button class="heart-ico" aria-label="좋아요"><img src="./img/heart_ico.svg"></button>
+                    </div>
+                </article>
+              </div>
 
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea  id="message" rows="6"></textarea>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="special" /></li>
-										<li><input type="reset" value="Clear" /></li>
-									</ul>
-								</form>
-							</section>
-							
-							<section class="split">
-								<section>
-									<div class="contact-method">
-										<span class="icon alt fa-envelope"></span>
-										<h3>Email</h3>
-										<!-- Q5. 로그인 한 사용자의 이메일을 출력 -->
-										<a href="#">로그인 한 사람의 이메일을 출력</a>
-									</div>
-								</section>
-								<section>
-								<div class="contact-method">
-										<span class="icon alt fa-phone"></span>
-										<h3>Phone</h3>
-										<!-- Q5. 로그인 한 사용자의 전화번호를 출력 -->
-										<span>로그인 한 사람의 전화번호를 출력</span>
-									</div>
-								</section>
-								<section>
-									<div class="contact-method">
-										<span class="icon alt fa-home"></span>
-										<h3>Address</h3>
-										<!-- Q5. 로그인 한 사용자의 집주소를 출력 -->
-										<span>로그인 한 사람의 집주소를 출력</span>
-									</div>
-								</section>
-							</section>					
-						</div>
-					</section>
+              <div class="frame-13">
+                
+                <article class="prj-box-2">
+                    <div class="frame-14">
+                      <div class="frame-15">
+                        <header class="frame-16">
+                          <p class="prj-sub">공모전 프로젝트</p>
+                          <h3 class="prj-box-tit">신용카드 고객 세그먼트 분류 AI 경진대회 공모전 팀원을 구합니다</h3>
+                        </header>
+                        <ul class="div-2">
+                          <li class="prj-box-stack"><span class="text-wrapper-7">React</span></li>
+                          <li class="prj-box-stack"><span class="text-wrapper-7">Java</span></li>
+                          <li class="prj-box-stack"><span class="text-wrapper-7">Python</span></li>
+                          <li class="prj-box-stack"><span class="text-wrapper-7">Figma</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="frame-18">
+                      <time class="text-wrapper-5" datetime="2025-04-11">
+                        <img class="img" src="./img/calendar_ico.svg" alt="달력 아이콘" />
+                        마감일 2025.04.11
+                      </time>
+                      <button class="heart-ico" aria-label="좋아요"><img src="./img/heart_ico.svg"></button>
+                    </div>
+                  </article>
 
-				<!-- Footer -->
-					<footer id="footer">
-						<div class="inner">
-							<ul class="icons">
-								<li><a href="#" class="icon alt fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon alt fa-facebook"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon alt fa-instagram"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon alt fa-github"><span class="label">GitHub</span></a></li>
-								<li><a href="#" class="icon alt fa-linkedin"><span class="label">LinkedIn</span></a></li>
-							</ul>
-							<ul class="copyright">
-								<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</footer>
+                  <article class="prj-box-2">
+                    <div class="frame-14">
+                      <div class="frame-15">
+                        <header class="frame-16">
+                          <p class="prj-sub">공모전 프로젝트</p>
+                          <h3 class="prj-box-tit">신용카드 고객 세그먼트 분류 AI 경진대회 공모전 팀원을 구합니다</h3>
+                        </header>
+                        <ul class="div-2">
+                          <li class="prj-box-stack"><span class="text-wrapper-7">React</span></li>
+                          <li class="prj-box-stack"><span class="text-wrapper-7">Java</span></li>
+                          <li class="prj-box-stack"><span class="text-wrapper-7">Python</span></li>
+                          <li class="prj-box-stack"><span class="text-wrapper-7">Figma</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="frame-18">
+                      <time class="text-wrapper-5" datetime="2025-04-11">
+                        <img class="img" src="./img/calendar_ico.svg" alt="달력 아이콘" />
+                        마감일 2025.04.11
+                      </time>
+                      <button class="heart-ico" aria-label="좋아요"><img src="./img/heart_ico.svg"></button>
+                    </div>
+                  </article>
 
-			</div>
+                <article class="prj-box-2">
+                    <div class="frame-14">
+                      <div class="frame-15">
+                        <header class="frame-16">
+                          <p class="prj-sub">공모전 프로젝트</p>
+                          <h3 class="prj-box-tit">신용카드 고객 세그먼트 분류 AI 경진대회 공모전 팀원을 구합니다</h3>
+                        </header>
+                        <ul class="div-2">
+                          <li class="prj-box-stack"><span class="text-wrapper-7">React</span></li>
+                          <li class="prj-box-stack"><span class="text-wrapper-7">Java</span></li>
+                          <li class="prj-box-stack"><span class="text-wrapper-7">Python</span></li>
+                          <li class="prj-box-stack"><span class="text-wrapper-7">Figma</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="frame-18">
+                      <time class="text-wrapper-5" datetime="2025-04-11">
+                        <img class="img" src="./img/calendar_ico.svg" alt="달력 아이콘" />
+                        마감일 2025.04.11
+                      </time>
+                      <button class="heart-ico" aria-label="좋아요"><img src="./img/heart_ico.svg"></button>
+                    </div>
+                  </article>
+              </div>
+            </div>
+          </section>
 
-		<!-- Scripts -->
-			<script src="resources/assets/js/jquery.min.js"></script>
-			<script src="resources/assets/js/jquery.scrolly.min.js"></script>
-			<script src="resources/assets/js/jquery.scrollex.min.js"></script>
-			<script src="resources/assets/js/skel.min.js"></script>
-			<script src="resources/assets/js/util.js"></script>
-			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-			<script src="resources/assets/js/main.js"></script>
-            <script type="text/javascript">
-            	function checkE(){ /* jQuery : $ */
-            		var inputE = $('#inputE').val()
-            		console.log(inputE)
-            		
-            		$.ajax({
-            			// 어디로 요청할 것인지 
-            			url : 'emailCheck', 
-            			// 요청 데이터
-            			data : {'inputE' : checkE},
-            			// 요청 방식
-            			type : 'get', 
-            			// 응답에 성공했을 때 어떤 함수를 실행할 지
-            			success : function(data){
-            				if(data == 0){
-            					$('#possibleEmail').text('사용 불가능한 이메일')
-            				} else {
-            					$('#possibleEmail').text('사용 가능한 이메일')
-            				}
-            			},
-            			// 응답에 실패했을 때 어떤 함수를 실행할 지
-            			error : function(){
-            				alert("통신 실패")
-            			}
-            		})
-            	}
-            </script>
-	</body>
+        <!-- 공모전 -->
+        <section class="contest">
+            <div class="prj_right_wrap">
+                <div>
+                    <h2 class="text-wrapper-3">공모전에 참여해보세요!</h2>
+                    <p class="p">접수중인 공모전을 선택해서 프로젝트를 진행해봐요</p>
+                  </div>
+                  <button class="frame-wrapper">전체보기</button>
+            </div>
+          
+          <div class="frame-5">
+            <article class="contest-box">
+              <img class="image" src="./img/20250320173728_KSpo.jpg" alt="공모전 이미지" />
+              <div class="frame-6">
+                <h3 class="con-box-tit">신용카드 고객 세그먼트 분류 AI 경진대회</h3>
+                <div class="frame-7">
+                  <time class="text-wrapper-5" datetime="2025-03-24">
+                    <img class="img" src="./img/calendar_ico.svg" alt="달력 아이콘" />
+                    2025.03.24
+                  </time>
+                  <p class="text-wrapper-6">마감 임박 D-7</p>
+                </div>
+              </div>
+            </article>
+            <article class="contest-box">
+              <img class="image" src="./img/20250320173728_KSpo.jpg" alt="공모전 이미지" />
+              <div class="frame-6">
+                <h3 class="con-box-tit">신용카드 고객 세그먼트 분류 AI 경진대회</h3>
+                <div class="frame-7">
+                  <time class="text-wrapper-5" datetime="2025-03-24">
+                    <img class="img" src="./img/calendar_ico.svg" alt="달력 아이콘" />
+                    2025.03.24
+                  </time>
+                  <p class="text-wrapper-6">마감 임박 D-7</p>
+                </div>
+              </div>
+            </article>
+            <article class="contest-box">
+              <img class="image" src="./img/20250320173728_KSpo.jpg" alt="공모전 이미지" />
+              <div class="frame-6">
+                <h3 class="con-box-tit">신용카드 고객 세그먼트 분류 AI 경진대회</h3>
+                <div class="frame-7">
+                  <time class="text-wrapper-5" datetime="2025-03-24">
+                    <img class="img" src="./img/calendar_ico.svg" alt="달력 아이콘" />
+                    2025.03.24
+                  </time>
+                  <p class="text-wrapper-6">마감 임박 D-7</p>
+                </div>
+              </div>
+            </article>
+            <article class="contest-box">
+              <img class="image" src="./img/20250320173728_KSpo.jpg" alt="공모전 이미지" />
+              <div class="frame-6">
+                <h3 class="con-box-tit">신용카드 고객 세그먼트 분류 AI 경진대회</h3>
+                <div class="frame-7">
+                  <time class="text-wrapper-5" datetime="2025-03-24">
+                    <img class="img" src="./img/calendar_ico.svg" alt="달력 아이콘" />
+                    2025.03.24
+                  </time>
+                  <p class="text-wrapper-6">마감 임박 D-7</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+        
+        <!-- footer -->
+        <footer class="footer">
+            <nav class="f-nav">
+              <ul>
+                <li><a href="#" class="text-wrapper">고객센터</a></li>
+                <li><a href="#" class="text-wrapper">이용약관</a></li>
+                <li><a href="#" class="text-wrapper-2">개인정보처리방침</a></li>
+              </ul>
+            </nav>
+            <p class="f-copy">Copyrights ⓒLogoname&nbsp;&nbsp;All rights reserved.</p>
+            <div class="f-logo">
+              <img class="f-logo-symbol" src="img/f-logo-symbol.svg" alt="로고 심볼" />
+              <h2 class="f-logo-tit">LOGOTITLE</h2>
+            </div>
+          </footer>
+      </div>
+    </div>
+  </body>
 </html>
-
