@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.mapper.ScheduleMapper">
+	<select id="scheduleList" resultType="com.smhrd.entity.Schedule">
+		SELECT * FROM SCHEDULES;
+	</select>
+	
+	
+	<insert id="insertSchedule" parameterType="com.smhrd.entity.Schedule">
+		INSERT INTO SCHEDULES VALUES (#{sche_idx}, 1, #{sche_nm}, #{sche_desc}, #{st_dt}, #{ed_dt}, #{sche_status}, #{sche_color})
+	</insert>
+		
+	<update id="updateSchedule" parameterType="com.smhrd.entity.Schedule" >
+		UPDATE SCHEDULES SET    WHERE SCHE_IDX = #{sche_idx}
+		
+		update member set pw=#{pw}, tel=#{tel}, address=#{address} 
+		where email=#{email}
+	</update>
+	
+	
+	
+	<delete id="deleteSchedule">
+		DELETE FROM SCHEDULES WHERE SCHE_IDX = #{sche_idx}
+	</delete>
+</mapper>
+

@@ -41,8 +41,21 @@
    }
    </style>
   <title>Document</title>
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+
+    </script>
 </head>
 <body>
+<div id='calendar'></div>
   <div class="main-before">
     <div class="footer">
       <div class="f-nav">
