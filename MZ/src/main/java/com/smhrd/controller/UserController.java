@@ -1,5 +1,6 @@
 package com.smhrd.controller;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,7 +42,22 @@ public class UserController {
       }
       return response;
    }
-
+   
+   @PostMapping("/join")
+	public int join(@RequestBody User user) { 
+		User check = userMapper.select(user);
+		
+		int result = 0;
+		if(check != null) {
+			result = -1;
+		}
+		else {
+			result = userMapper.join(user);	
+		}
+		return result;
+	}
+	
+   
    @PostMapping("/login")
    public Map<String, Object> login(@RequestBody Map<String, String> credentials, HttpSession session) {
       logger.info("userId: {}", credentials.get("userId"));
@@ -50,14 +66,13 @@ public class UserController {
       String userPw = credentials.get("userPw");
 
       User user = userMapper.getUserByIdPw(userId, userPw);
-      // logger.info("  ȸ         : {}", user.toString());
 
       Map<String, Object> response = new HashMap<String, Object>();
-      if (user != null && user.getUserPw().equals(userPw)) {
-         session.setAttribute("loggedInUserNm", user.getUserNm());
+      if (user != null && user.getUser_pw().equals(userPw)) {
+         session.setAttribute("loggedInUserNm", user.getUser_nm());
          logger.info("Session ID: " + session.getId());
          response.put("success", true);
-         response.put("userNm", user.getUserNm());
+         response.put("userNm", user.getUser_nm());
       } else {
          response.put("success", false);
          response.put("message", "아이디 또는 비밀번호를 확인해주세요.");

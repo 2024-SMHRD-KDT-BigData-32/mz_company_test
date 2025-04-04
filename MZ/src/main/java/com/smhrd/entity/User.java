@@ -1,3 +1,4 @@
+
 package com.smhrd.entity;
 
 import java.sql.Date;
@@ -7,27 +8,25 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class User {
 
     @NonNull
-    private String userId;      // 사용자 아이디
+    private String user_id;      
 
     @NonNull
-    private String userPw;      // 사용자 비밀번호
-
+    private String user_pw;     
     @NonNull
-    private String userNm;      // 사용자 이름
-
+    private String user_nm;      
     @NonNull
-    private Date userBirthdate; // 사용자 생년월일
-
-    @NonNull
-    private String userRole;    // 사용자 구분 (예: admin, user 등)
+    private Date user_birthdate; 
     
-    private Timestamp joinedAt;  // 가입 일자
-
+    private String user_role;    
+    
+    private Timestamp joined_at;  
 }

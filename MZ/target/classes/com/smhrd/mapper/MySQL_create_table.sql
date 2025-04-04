@@ -28,3 +28,8 @@ insert into board(title, writer, filename, content)
 values('test1', 'test1', 'test1', 'test1');
 insert into board(title, writer, filename, content)
 values('test2', 'test2', 'test2', 'test2');
+
+
+
+
+SELECT * FROM USERS;
