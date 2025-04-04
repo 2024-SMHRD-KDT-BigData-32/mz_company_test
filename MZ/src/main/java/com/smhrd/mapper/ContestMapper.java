@@ -9,7 +9,9 @@ import com.smhrd.entity.Contest;
 @Mapper
 public interface ContestMapper {
 
-	List<Contest> contestList();
+	public List<Contest> contestList();
+
+	public Contest contestDetail(int contest_idx);
 
 	
 	

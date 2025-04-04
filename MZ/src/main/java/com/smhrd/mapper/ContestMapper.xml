@@ -4,4 +4,8 @@
 	<select id="contestList" resultType="com.smhrd.entity.Contest">
 		SELECT * FROM CONTESTS;
 	</select>
+	
+	<select id="contestDetail" parameterType="int" resultType="com.smhrd.entity.Contest">
+		SELECT * FROM CONTESTS WHERE CONTEST_IDX = #{contest_idx};
+	</select>
 </mapper>
