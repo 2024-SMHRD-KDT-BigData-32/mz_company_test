@@ -1,6 +1,5 @@
 package com.smhrd.controller;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,80 +21,83 @@ import com.smhrd.mapper.UserMapper;
 @RequestMapping("/user")
 public class UserController {
 
-   private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-   @Autowired
-   private UserMapper userMapper;
+	@Autowired
+	private UserMapper userMapper;
 
-   @GetMapping("/session-info")
-   public Map<String, Object> getSessionInfo(HttpSession session) {
-      Map<String, Object> response = new HashMap<String, Object>();
-      logger.info("Session ID: " + session.getId());
-      String loggedInUserNm = (String) session.getAttribute("loggedInUserNm");
+	@GetMapping("/session-info")
+	public Map<String, Object> getSessionInfo(HttpSession session) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		logger.info("Session ID: " + session.getId());
+		String loggedInUserId = (String) session.getAttribute("loggedInUserId");
+		String loggedInUserNm = (String) session.getAttribute("loggedInUserNm");
 
-      if (loggedInUserNm != null) {
-         response.put("loggedIn", true);
-         response.put("userNm", loggedInUserNm);
-      } else {
-         response.put("loggedIn", false);
-         response.put("userNm", null);
-      }
-      return response;
-   }
-   
-   @PostMapping("/join")
-	public int join(@RequestBody User user) { 
-		User check = userMapper.select(user);
-		
-		int result = 0;
-		if(check != null) {
-			result = -1;
+		if (loggedInUserNm != null) {
+			response.put("loggedIn", true);
+			response.put("user_id", loggedInUserId);
+			response.put("user_nm", loggedInUserNm);
+		} else {
+			response.put("loggedIn", false);
+			response.put("user_id", null);
+			response.put("user_nm", null);
 		}
-		else {
-			result = userMapper.join(user);	
+		return response;
+	}
+
+	@PostMapping("/join")
+	public int join(@RequestBody User user) {
+		User check = userMapper.select(user);
+
+		int result = 0;
+		if (check != null) {
+			result = -1;
+		} else {
+			result = userMapper.join(user);
 		}
 		return result;
 	}
-	
-   
-   @PostMapping("/login")
-   public Map<String, Object> login(@RequestBody Map<String, String> credentials, HttpSession session) {
-      logger.info("userId: {}", credentials.get("userId"));
-      logger.info("userPw: {}", credentials.get("userPw"));
-      String userId = credentials.get("userId");
-      String userPw = credentials.get("userPw");
 
-      User user = userMapper.getUserByIdPw(userId, userPw);
+	@PostMapping("/login")
+	public Map<String, Object> login(@RequestBody Map<String, String> credentials, HttpSession session) {
+		logger.info("userId: {}", credentials.get("user_id"));
+		logger.info("userPw: {}", credentials.get("user_pw"));
+		String userId = credentials.get("user_id");
+		String userPw = credentials.get("user_pw");
 
-      Map<String, Object> response = new HashMap<String, Object>();
-      if (user != null && user.getUser_pw().equals(userPw)) {
-         session.setAttribute("loggedInUserNm", user.getUser_nm());
-         logger.info("Session ID: " + session.getId());
-         response.put("success", true);
-         response.put("userNm", user.getUser_nm());
-      } else {
-         response.put("success", false);
-         response.put("message", "아이디 또는 비밀번호를 확인해주세요.");
-      }
-      return response;
-   }
+		User user = userMapper.getUserByIdPw(userId, userPw);
 
-   @PostMapping("/logout")
-   public Map<String, Object> logout(HttpSession session) {
-      Map<String, Object> response = new HashMap<String, Object>();
-      if (session != null) {
-         try {
-            session.invalidate();
-            response.put("isLogout", true);
-         } catch (Exception e) {
-            logger.error("세션 무효화 중 오류 발생: {}", e.getMessage());
-            response.put("isLogout", false);
-         }
-      } else {
-         response.put("isLogout", false);
-      }
-      
-      return response;
-   }
+		Map<String, Object> response = new HashMap<String, Object>();
+		if (user != null && user.getUser_pw().equals(userPw)) {
+			session.setAttribute("loggedInUserId", user.getUser_id());
+			session.setAttribute("loggedInUserNm", user.getUser_nm());
+			logger.info("Session ID: " + session.getId());
+			response.put("success", true);
+			response.put("user_id", user.getUser_id());
+			response.put("user_nm", user.getUser_nm());
+		} else {
+			response.put("success", false);
+			response.put("message", "아이디 또는 비밀번호를 확인해주세요.");
+		}
+		return response;
+	}
+
+	@PostMapping("/logout")
+	public Map<String, Object> logout(HttpSession session) {
+		Map<String, Object> response = new HashMap<String, Object>();
+		if (session != null) {
+			try {
+				session.invalidate();
+				response.put("isLogout", true);
+			} catch (Exception e) {
+				logger.error("세션 무효화 중 오류 발생: {}", e.getMessage());
+				response.put("isLogout", false);
+			}
+		} else {
+			response.put("isLogout", false);
+		}
+
+		return response;
+	}
 
 }

@@ -13,6 +13,6 @@ public interface ContestMapper {
 
 	public Contest contestDetail(int contest_idx);
 
-	
+	public Contest getByPrjIdx(int prj_idx);
 	
 }

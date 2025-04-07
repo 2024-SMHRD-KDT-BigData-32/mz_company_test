@@ -13,24 +13,22 @@ import java.sql.Timestamp;
 @RequiredArgsConstructor
 @Data
 public class Project {
-    
-	@NonNull
-    private Integer prjIdx; // 프로젝트 식별자 (PK)
+   
+    private Integer prj_idx; 
     
     @NonNull
-    private String prjNm; // 프로젝트 명
+    private String prj_nm;   
     
     @NonNull 
-    private String prjDesc; // 프로젝트 설명
+    private String prj_desc; 
     
-    @NonNull 
-    private String userId; // 개설자 아이디 (Users 테이블과 관계)
+    @NonNull
+    private String user_id; 
     
-    private Integer contestIdx; // 공모전 식별자 (Contests 테이블과 관계)
+    private Integer contest_idx; 
+     
+    private Timestamp created_at; 
     
-    @NonNull 
-    private Timestamp createdAt; // 등록 날짜
-    
-    private Timestamp updatedAt; // 수정 날짜
+    private Timestamp updated_at; 
 }
 

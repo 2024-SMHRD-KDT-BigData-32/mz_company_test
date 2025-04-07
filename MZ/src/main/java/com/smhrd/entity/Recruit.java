@@ -4,31 +4,33 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
 import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@RequiredArgsConstructor
 @Data
 public class Recruit {
 	
-	@NonNull
-    private Integer rcIdx; // 모집 식별자 (PK)
+    private Integer rc_idx;
 
     @NonNull
-    private Integer prjIdx; // 프로젝트 식별자 (Projects 테이블과 관계)
+    private Integer prj_idx; 
 
     @NonNull
-    private String rcTitle; // 모집 제목
+    private String rc_title; 
 
     @NonNull
-    private String rcContent; // 모집 내용
+    private String rc_content;
 
     @NonNull
-    private String userId; // 작성자 ID
+    private String user_id; 
 
     @NonNull
-    private Timestamp closedAt; // 모집 마감일
+    private Timestamp closed_at;
     	
-    @NonNull
-    private Timestamp createdAt; // 등록 일자
+    
+    private Timestamp created_at; 
 }

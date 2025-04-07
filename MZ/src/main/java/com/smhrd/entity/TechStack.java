@@ -10,12 +10,11 @@ import lombok.NonNull;
 @NoArgsConstructor
 public class TechStack {
 	
-	@NonNull
-	private Integer stackIdx;	// 스텍 식별자
+	private Integer stack_idx;	// PK(AUTO_INCREMENT)
 	
 	@NonNull
-	private String stackType;	// 스텍 구분
+	private String stack_type; // 
 	
 	@NonNull
-	private String stackNm;	// 스텍 명
+	private String stack_nm;
 }
