@@ -4,12 +4,12 @@
 	
 	<!-- MyBatis Logging 활성화 -->
 	
-	<!--  
+	 
 	<logger name="org.apache.ibatis.logging.Log4jImpl" level="DEBUG"/>
 	<logger name="org.apache.ibatis.logging.jdbc.ConnectionLogger" level="DEBUG"/>
 	<logger name="org.apache.ibatis.logging.jdbc.StatementLogger" level="DEBUG"/>
 	<logger name="org.apache.ibatis.logging.jdbc.PreparedStatementLogger" level="DEBUG"/>
-	-->
+	
 	
 	<!-- Appenders -->
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
