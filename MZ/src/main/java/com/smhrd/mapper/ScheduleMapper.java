@@ -10,7 +10,7 @@ import com.smhrd.entity.Schedule;
 public interface ScheduleMapper {
 
 	public List<Schedule> scheduleList();
-    public String insertSchedule(Schedule schedule);
-    public String updateSchedule(Schedule schedule);
-    public String deleteSchedule(String sche_idx);
+	public int insertSchedule(Schedule schedule);
+	public void updateSchedule(Schedule schedule);
+	public int deleteSchedule(int sche_idx);
 }

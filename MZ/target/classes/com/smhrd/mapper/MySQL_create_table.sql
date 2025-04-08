@@ -32,4 +32,4 @@ values('test2', 'test2', 'test2', 'test2');
 
 
 
-SELECT * FROM USERS;
+SELECT * FROM TASKS;

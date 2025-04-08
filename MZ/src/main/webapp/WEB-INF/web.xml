@@ -19,9 +19,19 @@
     <filter-mapping> 
        <filter-name>encodingFilter</filter-name> 
        <url-pattern>/*</url-pattern> 
-    </filter-mapping> 
-    
-	 	
+
+    </filter-mapping>
+     
+	<filter>
+      <filter-name>sessionFilter</filter-name>
+      <filter-class>com.smhrd.config.SessionFilter</filter-class>
+   </filter>
+   <filter-mapping>
+      <filter-name>sessionFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+   </filter-mapping>
+   
+
 	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

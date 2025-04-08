@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.mapper.TaskMapper">
+	<select id="workList" resultType="com.smhrd.entity.Task">
+		SELECT * FROM TASKS;
+	</select>
+	
+	<delete id="deleteWork" parameterType="int">
+        DELETE FROM TASKS WHERE TASK_IDX = #{task_idx}
+    </delete>
+    
+    <update id="updateWork" parameterType="com.smhrd.entity.Task">
+        UPDATE TASKS 
+        SET 
+        <if test="task_nm != null">TASK_NM = #{task_nm},</if>
+        <if test="task_desc != null">TASK_DESC = #{task_desc},</if>
+        <if test="task_st_dt != null">TASK_ST_DT = #{task_st_dt},</if>
+		<if test="task_ed_dt != null">TASK_ED_DT = #{task_ed_dt},</if>
+        <if test="task_priority != null">TASK_PRIORITY = #{task_priority},</if>
+        <if test="task_status != null">TASK_STATUS = #{task_status},</if>
+        <if test="task_per != null">TASK_PER = #{task_per},</if>
+        <if test="user_id != null">USER_ID = #{user_id},</if>
+            UPDATED_AT = NOW()
+        WHERE TASK_IDX = #{task_idx}
+    </update>
+    
+	<insert id="addWork" parameterType="com.smhrd.entity.Task">
+	    INSERT INTO TASKS (
+	        PRJ_IDX, TASK_NM, TASK_DESC, 
+	        TASK_PRIORITY, TASK_ST_DT, TASK_ED_DT, TASK_STATUS,  
+	        CREATED_AT, UPDATED_AT
+	    ) VALUES (
+	        #{prj_idx}, #{task_nm}, #{task_desc}, 
+	        #{task_priority}, #{task_st_dt}, #{task_ed_dt}, #{task_status},  
+	        NOW(), NOW()
+	    )
+	</insert>
+		
+</mapper>
