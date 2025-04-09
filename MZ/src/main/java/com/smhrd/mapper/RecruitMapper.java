@@ -29,4 +29,8 @@ public interface RecruitMapper {
 
 	Integer selectContestIdxByPrjIdx(@Param("prj_idx") int prj_idx);
 
+	Contest selectContestByContestIdx(@Param("contest_idx") int contest_idx);
+
+	String getRcTitleByIdx(@Param("rc_idx") Integer rc_idx);
+
 }

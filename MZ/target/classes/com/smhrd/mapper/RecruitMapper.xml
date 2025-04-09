@@ -39,4 +39,11 @@
 		select contest_idx from PROJECTS where prj_idx=#{prj_idx}
 	</select>
 	
+	<select id="selectContestByContestIdx" parameterType="int" resultType="com.smhrd.entity.Contest">	
+		select * from CONTESTS where contest_idx=#{contest_idx}
+	</select> 
+	
+	<select id="getRcTitleByIdx" resultType="java.lang.String">
+		select rc_title from RECRUITS where rc_idx=#{rc_idx}
+	</select>
 </mapper>

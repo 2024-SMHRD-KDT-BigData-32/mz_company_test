@@ -29,7 +29,7 @@ public class UserController {
 	@GetMapping("/session-info")
 	public Map<String, Object> getSessionInfo(HttpSession session) {
 		Map<String, Object> response = new HashMap<String, Object>();
-		logger.info("Session ID: " + session.getId());
+//		logger.info("Session ID: " + session.getId());
 		String loggedInUserId = (String) session.getAttribute("loggedInUserId");
 		String loggedInUserNm = (String) session.getAttribute("loggedInUserNm");
 
