@@ -3,7 +3,7 @@
 <mapper namespace="com.smhrd.mapper.ScheduleMapper">
 	
 	<select id="scheduleList" resultType="com.smhrd.entity.Schedule">
-        SELECT * FROM SCHEDULES
+        SELECT * FROM SCHEDULES	
     </select>
     
     <insert id="insertSchedule" parameterType="com.smhrd.entity.Schedule">

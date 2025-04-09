@@ -13,20 +13,28 @@ import java.sql.Timestamp;
 @Data
 public class Chatting {
     
-	@NonNull 
-    private Integer chatIdx; // ´ëÈ­ ½Äº°ÀÚ
+    private Integer chat_idx; // ëŒ€í™” ì‹ë³„ì
+    
+    private Integer croom_idx; // ë°© ì‹ë³„ì
     
     @NonNull 
-    private Integer croomIdx; // ¹æ ½Äº°ÀÚ
+    private String chatter; // ëŒ€í™”ì
     
-    @NonNull 
-    private String chatter; // ¹ßÈ­ÀÚ
+    private String chat_content; // ëŒ€í™” ë‚´ìš©
     
-    private String chatContent; // ¹ßÈ­ ³»¿ë
+    private String chat_emoticon; // ëŒ€í™” ì´ëª¨í‹°ì½˜
     
-    private String chatEmoticon; // ¹ßÈ­ ÀÌ¸ğÆ¼ÄÜ
+    private String chat_file; // ëŒ€í™” íŒŒì¼
     
-    private String chatFile; // ¹ßÈ­ ÆÄÀÏ
+    private Timestamp created_at; // ëŒ€í™” ì‹œê°„
     
-    private Timestamp createdAt; // ¹ßÈ­ ½Ã°£
+    // ë©”ì‹œì§€ íƒ€ì… í•„ë“œ ì¶”ê°€
+    private String messageType; // ENTER, QUIT, TALK
+    
+    // ë©”ì‹œì§€ íƒ€ì… ìƒìˆ˜ ì •ì˜
+    public static class MessageType {
+        public static final String ENTER = "ENTER";
+        public static final String QUIT = "QUIT";
+        public static final String TALK = "TALK";
+    }
 }
