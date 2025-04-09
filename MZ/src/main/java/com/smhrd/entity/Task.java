@@ -7,47 +7,51 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import java.sql.Timestamp;
 
+
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Data
 public class Task {
     
-	@NonNull
-    private Integer taskIdx; // ¾÷¹« ½Äº°ÀÚ (PK)
+	
+    private Integer task_idx; // ï¿½ï¿½ï¿½ï¿½ ï¿½Äºï¿½ï¿½ï¿½ (PK)
     
     @NonNull
-    private Integer prjIdx; // ÇÁ·ÎÁ§Æ® ½Äº°ÀÚ (Projects Å×ÀÌºí°ú °ü°è)
+    private Integer prj_idx; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Äºï¿½ï¿½ï¿½ (Projects ï¿½ï¿½ï¿½Ìºï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
     
     @NonNull
-    private String taskNm; // ¾÷¹« ¸í
+    private String task_nm; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
     
     @NonNull
-    private String taskDesc; // ¾÷¹« ¼³¸í
+    private String task_desc; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     
     @NonNull
-    private String taskPriority; // ¾÷¹« ¿ì¼±¼øÀ§ (ENUM: '±ä±Þ', '³ôÀ½', 'Áß°£', '³·À½', 'º¸·ù')
+    private String task_priority; // ï¿½ï¿½ï¿½ï¿½ ï¿½ì¼±ï¿½ï¿½ï¿½ï¿½ (ENUM: 'ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½ï¿½', 'ï¿½ß°ï¿½', 'ï¿½ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½ï¿½')
     
     @NonNull
-    private Timestamp taskStDt; // ¾÷¹« ½ÃÀÛ ÀÏÀÚ
+    private Timestamp task_st_dt; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     
     @NonNull
-    private Timestamp taskEdDt; // ¾÷¹« ¸¶°¨ ÀÏÀÚ
+    private Timestamp task_ed_dt; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     
     @NonNull
-    private String taskStatus; // ¾÷¹« Ã³¸®»óÅÂ
+    private String task_status; // ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     
-    @NonNull
-    private String alarmType; // ¾Ë¶÷ ±¸ºÐ
     
-    @NonNull
-    private Timestamp alarmTime; // ¾Ë¶÷ ½Ã°£
+    private String alarm_type; // ï¿½Ë¶ï¿½ ï¿½ï¿½ï¿½ï¿½
     
-    @NonNull
-    private Timestamp createdAt; // µî·Ï ÀÏÀÚ
     
-    @NonNull
-    private Timestamp updatedAt; // ¼öÁ¤ ÀÏÀÚ
+    private Timestamp alarm_time; // ï¿½Ë¶ï¿½ ï¿½Ã°ï¿½
     
-    private Integer superTask; // »óÀ§ ¾÷¹« (SELF JOIN °ü°è)
+    private Timestamp created_at; // ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    
+    private Timestamp updated_at; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    
+    private Integer super_task; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (SELF JOIN ï¿½ï¿½ï¿½ï¿½)
+
+    private int task_per; 
+    
+    private String user_id;
+	
 }

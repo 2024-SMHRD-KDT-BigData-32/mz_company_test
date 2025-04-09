@@ -1,44 +1,29 @@
 package com.smhrd.entity;
 
+import java.sql.Timestamp;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import java.sql.Timestamp;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
-@Data
 public class Schedule {
+	
+	private Integer sche_idx;  // null 허용 (자동 생성을 위해)
+    @NonNull private Integer prj_idx;  // FK
+    @NonNull private String sche_nm;  // 스케쥴 제목
+    private String sche_desc;  // 스케쥴 내용 (null 허용)
+    @NonNull private Timestamp st_dt;
+    @NonNull private Timestamp ed_dt;
+    private Timestamp created_at;  // 생성 시간
+    private Timestamp updated_at;   // 수정할 경우 수정 시간
+    @NonNull private String sche_status;  // 스케쥴 상태
+    @NonNull private String sche_color;  // 스케쥴 색상
 
-   
-	@NonNull
-    private Integer scheIdx; // 스케쥴 식별자
-
-    @NonNull
-    private Integer prjIdx; // 프로젝트 식별자
-
-    @NonNull
-    private String scheNm; // 스케쥴 명
-
-    @NonNull
-    private String scheDesc; // 스케쥴 설명
-
-    @NonNull
-    private Timestamp stDt; // 시작 일자
-
-    @NonNull
-    private Timestamp edDt; // 종료 일자
-
-    private Timestamp createdAt; // 등록 일자
-
-    private Timestamp updatedAt; // 수정 일자
-
-    @NonNull 
-    private String scheStatus; // 스케쥴 상태
-
-    @NonNull 
-    private String scheColor; // 스케쥴 칼라
+    
 }

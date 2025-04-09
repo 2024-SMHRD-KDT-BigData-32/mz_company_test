@@ -1,6 +1,7 @@
 package com.smhrd.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -8,12 +9,15 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.smhrd.entity.TechStack;
 import com.smhrd.entity.User;
 import com.smhrd.mapper.UserMapper;
 
@@ -99,5 +103,53 @@ public class UserController {
 
 		return response;
 	}
+
+   
+   // 프로필 수정 부분
+   @GetMapping("/{user_id}")
+   public ResponseEntity<?> getUserProfile(@PathVariable String user_id) {
+       User user = userMapper.findUserById(user_id);
+       List<TechStack> userStacks = userMapper.findStacksByUserId(user_id);
+       List<TechStack> allStacks = userMapper.findAllStacks();
+
+       Map<String, Object> response = new HashMap<>();
+       response.put("user", user);
+       response.put("userStacks", userStacks);
+       response.put("allStacks", allStacks);
+
+       return ResponseEntity.ok(response);
+   }
+
+   @PostMapping("/updateProfile")
+   public ResponseEntity<?> updateUserProfile(@RequestBody Map<String, Object> payload) {
+       String user_id = (String) payload.get("user_id");
+       String user_nm = (String) payload.get("user_nm");
+       String newPw = (String) payload.get("user_pw"); // optional
+       List<String> skills = (List<String>) payload.get("skills");
+
+       User user = new User();
+       user.setUser_id(user_id);
+       user.setUser_nm(user_nm);
+       if (newPw != null && !newPw.isEmpty()) {
+           user.setUser_pw(newPw);
+       }
+
+       userMapper.updateUser(user);
+       userMapper.deleteStacksByUserId(user_id);
+
+       List<TechStack> allStacks = userMapper.findAllStacks();
+       if (skills != null) {
+           for (String skillName : skills) {
+               for (TechStack stack : allStacks) {
+                   if (stack.getStack_nm().equals(skillName)) {
+                       userMapper.insertUserStack(user_id, stack.getStack_idx());
+                   }
+               }
+           }
+       }
+
+       return ResponseEntity.ok("Profile updated successfully");
+   }
+
 
 }

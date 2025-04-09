@@ -13,6 +13,57 @@
   	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/styleguide.css' />">
   	<link rel="stylesheet" type="text/css" href="<c:url value='/resources/assets/css/globals.css' />">
   
+<<<<<<< HEAD
+  <style>
+   a,
+   button,
+   input,
+   select,
+   h1,
+   h2,
+   h3,
+   h4,
+   h5,
+   * {
+       box-sizing: border-box;
+       margin: 0;
+       padding: 0;
+       border: none;
+       text-decoration: none;
+       background: none;
+   
+       -webkit-font-smoothing: antialiased;
+   }
+   
+   menu, ol, ul {
+       list-style-type: none;
+       margin: 0;
+       padding: 0;
+   }
+   </style>
+  <title>Document</title>
+  <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.17/index.global.min.js'></script>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+
+    </script>
+</head>
+<body>
+<div id='calendar'></div>
+  <div class="main-before">
+    <div class="footer">
+      <div class="f-nav">
+        <div class="frame-1707484334">
+          <div class="frame-1707484335">
+            <div class="div">고객센터</div>
+=======
   </head>
   <body>
     <div class="main-before">
@@ -295,6 +346,7 @@
                 </div>
               </div>
             </article>
+>>>>>>> branch 'master' of https://github.com/2024-SMHRD-KDT-BigData-32/mz_company_test.git
           </div>
         </section>
         

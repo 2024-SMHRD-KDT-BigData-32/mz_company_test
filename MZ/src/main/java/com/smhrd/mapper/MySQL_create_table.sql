@@ -41,6 +41,9 @@ INSERT INTO TECH_STACKS (STACK_TYPE, STACK_NM) VALUES
 SELECT * FROM PROJECTS where user_id='mstop0809';
 select * from RECRUITS;
 
+<<<<<<< HEAD
+SELECT * FROM TASKS;
+=======
 CREATE TABLE RECRUIT_STACKS(
     `R_STACK_IDX` INT NOT NULL AUTO_INCREMENT COMMENT '모집 스텍 식별자',
     `RC_IDX` INT NOT NULL COMMENT '모집 식별자',
@@ -57,8 +60,12 @@ ALTER TABLE RECRUIT_STACKS
     ADD CONSTRAINT FK_RECRUIT_STACKS_STACK_IDX_TECH_STACKS_STACK_IDX
     FOREIGN KEY (STACK_IDX)
     REFERENCES TECH_STACKS (STACK_IDX) ON DELETE RESTRICT ON UPDATE RESTRICT;
+<<<<<<< HEAD
 
 select * from JOININGS;
 delete from JOININGS;
 delete from NOTIFICATIONS;
 select * from NOTIFICATIONS;
+=======
+>>>>>>> branch 'master' of https://github.com/2024-SMHRD-KDT-BigData-32/mz_company_test.git
+>>>>>>> branch 'master' of https://github.com/2024-SMHRD-KDT-BigData-32/mz_company_test.git
