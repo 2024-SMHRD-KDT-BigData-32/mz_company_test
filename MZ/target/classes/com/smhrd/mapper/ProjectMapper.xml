@@ -8,7 +8,7 @@
 	
 	
 	
-	<!-- <select id="getPrjList" resultType="com.smhrd.entity.Project">
+	 <select id="getPrjList" resultType="com.smhrd.entity.Project">
 		select * from PROJECTS
 	</select>
 	
@@ -19,5 +19,5 @@
 	
 	<select id="getUsrPrjList" parameterType="String" resultType="com.smhrd.entity.Project">
 		select * from PROJECTS where user_id=#{user_id}	
-	</select> -->
+	</select> 
 </mapper>

@@ -17,9 +17,9 @@ public interface ProjectMapper {
 
 	
 	
-//	List<Project> getPrjList();
-//
-//	boolean createPrj(Project projectData);
-//
-//	List<Project> getUsrPrjList(@RequestParam("user_id") String user_id);
+	List<Project> getPrjList();
+
+	boolean createPrj(Project projectData);
+
+	List<Project> getUsrPrjList(@RequestParam("user_id") String user_id);
 }

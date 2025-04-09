@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smhrd.mapper.ScheduleMapper">
 	
-	<select id="scheduleList" resultType="com.smhrd.entity.Schedule">
-        SELECT * FROM SCHEDULES	
+	<select id="scheduleList" parameterType="String" resultType="com.smhrd.entity.Schedule">
+        SELECT * FROM SCHEDULES	WHERE PRJ_IDX = #{prj_idx}
     </select>
     
     <insert id="insertSchedule" parameterType="com.smhrd.entity.Schedule">

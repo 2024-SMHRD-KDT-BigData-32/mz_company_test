@@ -26,65 +26,59 @@ public class ProjectController {
 	
 	@Autowired
 	private ProjectMapper mapper;
+		
 	
-	
-	@PostMapping("/list")
+	@PostMapping("/myList")
 	public List<Project> projectList(@RequestBody Map<String, String> paramMap) {
 		String userId = paramMap.get("user_id");
 		return mapper.projectList(userId);
 	}
 	
-	@GetMapping("{prj_idx}")
-	public Project searchProject(@PathVariable int prj_idx) {
+	
+	@GetMapping("/list")
+	public Map<String, Object> prjList(){
+		Map<String, Object> response = new HashMap<String, Object>();
 		
-		return mapper.searchProject(prj_idx);
+		List<Project> list = mapper.getPrjList(); 
+		if(list != null) {
+			response.put("prjList", list);
+		} else {
+			response.put("prjList", null);
+		}
+		return response;
 	}
 	
+	@PostMapping("/list")
+	public Map<String, Object> usrPrjList(@RequestBody Map<String, String> requestBody){
+		Map<String, Object> response = new HashMap<String, Object>();
+		String user_id = requestBody.get("user_id");
+		System.out.println("Received userId from frontend: " + user_id);
+		List<Project> list = mapper.getUsrPrjList(user_id);
+		if(list != null) {
+			response.put("usrPrjList", list);
+		} else {
+			response.put("usrPrjList", null);
+		}
+		return response;
+	}
 	
-//	@GetMapping("/list")
-//	public Map<String, Object> prjList(){
-//		Map<String, Object> response = new HashMap<String, Object>();
-//		
-//		List<Project> list = mapper.getPrjList(); 
-//		if(list != null) {
-//			response.put("prjList", list);
-//		} else {
-//			response.put("prjList", null);
-//		}
-//		return response;
-//	}
-//	
-//	@PostMapping("/list")
-//	public Map<String, Object> usrPrjList(@RequestBody Map<String, String> requestBody){
-//		Map<String, Object> response = new HashMap<String, Object>();
-//		String user_id = requestBody.get("user_id");
-//		System.out.println("Received userId from frontend: " + user_id);
-//		List<Project> list = mapper.getUsrPrjList(user_id);
-//		if(list != null) {
-//			response.put("usrPrjList", list);
-//		} else {
-//			response.put("usrPrjList", null);
-//		}
-//		return response;
-//	}
-//	
-//	@PostMapping("/make")
-//	public Map<String, Object> makePrj(@RequestBody Project projectData){
-//		Map<String, Object> response = new HashMap<String, Object>();
-//		logger.info("makePrj 메서드 호출됨: {}", projectData);
-//		try {
-//			boolean isSuccess = mapper.createPrj(projectData);
-//			
-//			if(isSuccess) {
-//				response.put("success", true);
-//			} else {
-//				response.put("success", false);
-//				response.put("message", "Failed to create project.");
-//			}
-//		} catch (Exception e) {
-//			response.put("success", false);
-//			response.put("message", e);
-//		}
-//		return response;
-//	}
+	@PostMapping("/make")
+	public Map<String, Object> makePrj(@RequestBody Project projectData){
+		Map<String, Object> response = new HashMap<String, Object>();
+		logger.info("makePrj 메서드 호출됨: {}", projectData);
+		try {
+			boolean isSuccess = mapper.createPrj(projectData);
+			
+			if(isSuccess) {
+				response.put("success", true);
+			} else {
+				response.put("success", false);
+				response.put("message", "Failed to create project.");
+			}
+		} catch (Exception e) {
+			response.put("success", false);
+			response.put("message", e);
+		}
+		return response;
+	}
 }

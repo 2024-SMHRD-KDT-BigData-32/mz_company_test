@@ -9,7 +9,7 @@ import com.smhrd.entity.Schedule;
 @Mapper
 public interface ScheduleMapper {
 
-	public List<Schedule> scheduleList();
+	public List<Schedule> scheduleList(String userId);
 	public int insertSchedule(Schedule schedule);
 	public void updateSchedule(Schedule schedule);
 	public int deleteSchedule(int sche_idx);
