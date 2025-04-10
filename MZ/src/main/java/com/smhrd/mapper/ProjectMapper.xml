@@ -6,6 +6,7 @@
 		SELECT * FROM PROJECTS WHERE USER_ID = #{user_id};
 	</select>
 	
+
 	<select id="getPrjList" resultType="com.smhrd.entity.Project">
 		select * from PROJECTS
 	</select>
@@ -17,5 +18,17 @@
 	
 	<select id="getUsrPrjList" parameterType="String" resultType="com.smhrd.entity.Project">
 		select * from PROJECTS where user_id=#{user_id}	
+	</select>
+	
+	<select id="selectPrjIdxsByJoiningUserId" resultType="java.lang.Integer">
+		select prj_idx from JOININGS where user_id=#{user_id} and approval_yn='Y'
+	</select>
+	
+	<select id="selectPrjsByIdxs" resultType="com.smhrd.entity.Project">
+		SELECT * FROM PROJECTS WHERE prj_idx IN
+		<foreach item="prj_idx" collection="prjIdxList" open="("
+			separator="," close=")">
+			#{prj_idx}
+		</foreach>
 	</select>
 </mapper>

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smhrd.mapper.TaskMapper">
-	<select id="workList" resultType="com.smhrd.entity.Task">
-		SELECT * FROM TASKS;
+	<select id="workList" parameterType="int" resultType="com.smhrd.entity.Task">
+		SELECT * FROM TASKS WHERE PRJ_IDX = #{prj_idx};
 	</select>
 	
 	<delete id="deleteWork" parameterType="int">
@@ -28,11 +28,11 @@
 	    INSERT INTO TASKS (
 	        PRJ_IDX, TASK_NM, TASK_DESC, 
 	        TASK_PRIORITY, TASK_ST_DT, TASK_ED_DT, TASK_STATUS,  
-	        CREATED_AT, UPDATED_AT
+	        CREATED_AT, UPDATED_AT, ASSIGNEE
 	    ) VALUES (
 	        #{prj_idx}, #{task_nm}, #{task_desc}, 
 	        #{task_priority}, #{task_st_dt}, #{task_ed_dt}, #{task_status},  
-	        NOW(), NOW()
+	        NOW(), NOW(), #{assignee}
 	    )
 	</insert>
 		

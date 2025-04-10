@@ -53,5 +53,7 @@ public class Task {
     private int task_per; 
     
     private String user_id;
+    
+    private String assignee;
 	
 }

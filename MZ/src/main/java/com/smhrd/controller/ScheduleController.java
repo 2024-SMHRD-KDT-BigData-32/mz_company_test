@@ -2,6 +2,7 @@ package com.smhrd.controller;
 
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,10 +31,10 @@ public class ScheduleController {
 	@Autowired
 	private ScheduleMapper mapper;
 
-	@GetMapping("/list")
-	public List<Schedule> scheduleList() {
-
-		return mapper.scheduleList();
+	@PostMapping("/list")
+	public List<Schedule> scheduleList(@RequestBody Map<String, String> paramMap) {
+		String userId = paramMap.get("prjIdx");
+		return mapper.scheduleList(userId);
 	}
 
 	@PostMapping("/add")

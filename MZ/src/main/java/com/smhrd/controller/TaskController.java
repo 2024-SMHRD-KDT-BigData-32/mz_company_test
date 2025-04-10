@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.smhrd.entity.Project;
@@ -31,11 +32,18 @@ public class TaskController {
 	private TaskMapper mapper;
 	
 	
+//	@GetMapping("/list")
+//	public List<Task> workList(){
+//		
+//		return mapper.workList();
+//	}
+//	
 	@GetMapping("/list")
-	public List<Task> workList(){
+	public List<Task> workList(@RequestParam("prjIdx") int prj_idx){
 		
-		return mapper.workList();
+		return mapper.workList(prj_idx);
 	}
+	
 	
 	@DeleteMapping("/delete/{task_idx}")
 	public ResponseEntity<String> deleteWork(@PathVariable("task_idx") int task_idx) {

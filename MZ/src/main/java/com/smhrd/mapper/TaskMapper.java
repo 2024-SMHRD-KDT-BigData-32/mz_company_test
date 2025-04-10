@@ -9,7 +9,7 @@ import com.smhrd.entity.Task;
 @Mapper
 public interface TaskMapper {
 
-	List<Task> workList();
+	List<Task> workList(int prj_idx);
 
 	int deleteWork(int task_idx);
 
