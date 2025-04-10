@@ -20,6 +20,7 @@
         <if test="task_status != null">TASK_STATUS = #{task_status},</if>
         <if test="task_per != null">TASK_PER = #{task_per},</if>
         <if test="user_id != null">USER_ID = #{user_id},</if>
+        <if test="assignee != null">ASSIGNEE = #{assignee},</if>
             UPDATED_AT = NOW()
         WHERE TASK_IDX = #{task_idx}
     </update>
