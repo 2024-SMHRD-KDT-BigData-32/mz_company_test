@@ -155,7 +155,27 @@ public class UserController {
    @PostMapping("/teamMate")
    public Map<String, Object> getTeamMates(@RequestBody Map<String, Object> data){
        Map<String, Object> response = new HashMap<String, Object>();
-       Integer prj_idx = (Integer) data.get("prj_idx");
+       Object prjIdxObj = data.get("prj_idx");
+       Integer prj_idx = null;
+       
+       if (prjIdxObj instanceof Integer) {
+           prj_idx = (Integer) prjIdxObj;
+       } else if (prjIdxObj instanceof String) {
+           try {
+               prj_idx = Integer.parseInt((String) prjIdxObj);
+           } catch (NumberFormatException e) {
+               response.put("success", false);
+               response.put("message", "프로젝트 ID가 올바른 숫자가 아닙니다.");
+               logger.error("Invalid prj_idx format: {}", prjIdxObj, e);
+               return response; // 에러 발생 시 바로 반환
+           }
+       } else {
+           response.put("success", false);
+           response.put("message", "프로젝트 ID의 형식이 올바르지 않습니다.");
+           logger.error("Unexpected prj_idx type: {}", prjIdxObj);
+           return response; // 에러 발생 시 바로 반환
+       }
+       
        List<User> userList = new ArrayList<User>();
        try {
            String user_id = userMapper.selectUserIdByPrjIdx(prj_idx);

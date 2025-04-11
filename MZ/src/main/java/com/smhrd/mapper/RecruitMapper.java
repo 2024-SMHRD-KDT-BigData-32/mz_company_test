@@ -1,6 +1,7 @@
 package com.smhrd.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -32,5 +33,6 @@ public interface RecruitMapper {
 	Contest selectContestByContestIdx(@Param("contest_idx") int contest_idx);
 
 	String getRcTitleByIdx(@Param("rc_idx") Integer rc_idx);
-
+	
+	List<Map<String, Object>> selectLatestRecruitsWithStacks(int limit);
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.smhrd.entity.Contest;
@@ -200,5 +201,50 @@ public class RecruitController {
         
 		return response;
     }
+	
+	@GetMapping("/latest")
+	public Map<String, Object> getLatestRecruits(@RequestParam(defaultValue = "6") int limit) {
+	    Map<String, Object> response = new HashMap<>();
+	    System.out.println("요청된 limit 값: " + limit); 
+	    try {
+	        List<Map<String, Object>> results = mapper.selectLatestRecruitsWithStacks(limit);
+	        System.out.println("쿼리 결과 개수: " + results.size());
+	        System.out.println("쿼리 구성: " + results.toString());
+	        List<Recruit> latestRecruits = new ArrayList<>();
+	        Map<Integer, Recruit> recruitMap = new HashMap<>();
+
+	        for (Map<String, Object> result : results) {
+	            int rcIdx = (int) result.get("rc_idx");
+	            System.out.println("처리 중인 rcIdx: " + rcIdx);
+	            if (!recruitMap.containsKey(rcIdx)) {
+	                Recruit recruit = new Recruit();
+	                recruit.setRc_idx(rcIdx);
+	                recruit.setRc_title((String) result.get("rc_title"));
+	                recruit.setRc_content((String) result.get("rc_content"));
+	                recruit.setUser_id((String) result.get("user_id"));
+	                recruit.setCreated_at((Timestamp) result.get("created_at"));
+	                recruit.setClosed_at((Timestamp) result.get("closed_at"));
+	                recruit.setStacks(new ArrayList<>());
+	                latestRecruits.add(recruit);
+	                recruitMap.put(rcIdx, recruit);
+	            }
+	            recruitMap.get(rcIdx).getStacks().add((String) result.get("stack_nm"));
+	        }
+
+	        if (!latestRecruits.isEmpty()) {
+	            response.put("success", true);
+	            response.put("latestRecruits", latestRecruits);
+	        } else {
+	            response.put("success", true);
+	            response.put("latestRecruits", new ArrayList<>());
+	            response.put("message", "최신 모집글이 없습니다.");
+	        }
+	    } catch (Exception e) {
+	        response.put("success", false);
+	        response.put("message", "서버 오류가 발생했습니다: " + e.getMessage());
+	        logger.error("최신 모집글 조회 중 오류 발생", e);
+	    }
+	    return response;
+	}
 
 }
