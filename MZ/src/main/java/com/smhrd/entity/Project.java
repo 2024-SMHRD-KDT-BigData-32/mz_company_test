@@ -13,27 +13,22 @@ import java.sql.Timestamp;
 @RequiredArgsConstructor
 @Data
 public class Project {
-
-	@NonNull
-    private Integer prj_idx; // ������Ʈ �ĺ��� (PK)
+   
+    private Integer prj_idx; 
     
     @NonNull
-    private String prj_nm; // ������Ʈ ��
-
+    private String prj_nm;   
+    
     @NonNull 
-    private String prj_desc; // ������Ʈ ����
-
-    @NonNull 
-    private String user_id; // ������ ���̵� (Users ���̺�� ����)
-
+    private String prj_desc; 
+    
+    @NonNull
+    private String user_id; 
+    
     private Integer contest_idx; 
      
-
-    @NonNull 
-    private Timestamp created_at; // ��� ��¥
+    private Timestamp created_at; 
     
-    private Timestamp updated_at; // ���� ��¥
-
-
+    private Timestamp updated_at; 
 }
 

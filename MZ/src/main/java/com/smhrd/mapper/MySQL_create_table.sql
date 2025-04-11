@@ -60,4 +60,12 @@ ALTER TABLE RECRUIT_STACKS
     ADD CONSTRAINT FK_RECRUIT_STACKS_STACK_IDX_TECH_STACKS_STACK_IDX
     FOREIGN KEY (STACK_IDX)
     REFERENCES TECH_STACKS (STACK_IDX) ON DELETE RESTRICT ON UPDATE RESTRICT;
+<<<<<<< HEAD
+
+select * from JOININGS;
+delete from JOININGS;
+delete from NOTIFICATIONS;
+select * from NOTIFICATIONS;
+=======
+>>>>>>> branch 'master' of https://github.com/2024-SMHRD-KDT-BigData-32/mz_company_test.git
 >>>>>>> branch 'master' of https://github.com/2024-SMHRD-KDT-BigData-32/mz_company_test.git

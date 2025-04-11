@@ -13,26 +13,22 @@ import java.sql.Timestamp;
 @Data
 public class Joining {
 
-	@NonNull 
-    private Integer joinIdx; // 가입 식별자 (PK)
+    private Integer join_idx;
 
     @NonNull 
-    private Integer rcIdx; // 모집 식별자 (Recruits 테이블과 관계)
+    private Integer rc_idx;
 
     @NonNull 
-    private String userId; // 지원자 아이디 (Users 테이블과 관계)
+    private String user_id;
+ 
+    private Timestamp joined_at;
+
+    private Character approval_yn; 
+
+    private Timestamp approved_at; 
+
+    private String rc_role; 
 
     @NonNull 
-    private Timestamp joinedAt; // 신청 날짜
-
-    @NonNull 
-    private Character approvalYn; // 승인 여부 ('Y' 또는 'N')
-
-    @NonNull 
-    private Timestamp approvedAt; // 승인 날짜
-
-    private String rcRole; // 지원자 역할
-
-    @NonNull 
-    private Integer prjIdx; // 프로젝트 식별자 (Projects 테이블과 관계)
+    private Integer prj_idx; 
 }

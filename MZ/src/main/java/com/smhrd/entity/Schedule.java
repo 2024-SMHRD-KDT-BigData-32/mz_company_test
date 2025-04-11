@@ -14,16 +14,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Schedule {
 	
-	private Integer sche_idx;  // null í—ˆìš© (ìë™ ìƒì„±ì„ ìœ„í•´)
+	private Integer sche_idx;  // null Çã¿ë (ÀÚµ¿ »ı¼ºÀ» À§ÇØ)
     @NonNull private Integer prj_idx;  // FK
-    @NonNull private String sche_nm;  // ìŠ¤ì¼€ì¥´ ì œëª©
-    private String sche_desc;  // ìŠ¤ì¼€ì¥´ ë‚´ìš© (null í—ˆìš©)
+    @NonNull private String sche_nm;  // ½ºÄÉÁì Á¦¸ñ
+    private String sche_desc;  // ½ºÄÉÁì ³»¿ë (null Çã¿ë)
     @NonNull private Timestamp st_dt;
     @NonNull private Timestamp ed_dt;
-    private Timestamp created_at;  // ìƒì„± ì‹œê°„
-    private Timestamp updated_at;   // ìˆ˜ì •í•  ê²½ìš° ìˆ˜ì • ì‹œê°„
-    @NonNull private String sche_status;  // ìŠ¤ì¼€ì¥´ ìƒíƒœ
-    @NonNull private String sche_color;  // ìŠ¤ì¼€ì¥´ ìƒ‰ìƒ
+    private Timestamp created_at;  // »ı¼º ½Ã°£
+    private Timestamp updated_at;   // ¼öÁ¤ÇÒ °æ¿ì ¼öÁ¤ ½Ã°£
+    @NonNull private String sche_status;  // ½ºÄÉÁì »óÅÂ
+    @NonNull private String sche_color;  // ½ºÄÉÁì »ö»ó
 
     
 }

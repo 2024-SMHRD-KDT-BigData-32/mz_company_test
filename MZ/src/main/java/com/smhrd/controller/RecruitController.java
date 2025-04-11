@@ -125,6 +125,28 @@ public class RecruitController {
 		return response;
 	}
 	
+	
+	@PostMapping("/contestIdx")
+	public Map<String, Object> selectContestIdxByPrjIdx(@RequestBody Map<String, Object> data){
+		Map<String, Object> response = new HashMap<String, Object>();
+		
+		int prj_idx = (int) data.get("prj_idx");
+		
+		try {
+			Integer contest_idx = mapper.selectContestIdxByPrjIdx(prj_idx);
+			if(contest_idx != null) {
+				response.put("contest_idx", contest_idx);
+			} else {
+				response.put("contest_idx", null);
+			}
+		} catch (Exception e) {
+			response.put("contest_idx", null);
+//			logger.info("An error occurred while fetching contest_idx", e);
+		}
+		
+		return response;
+	}
+	
 	@GetMapping("/{rc_idx}")
     public Map<String, Object> rcDetail(@PathVariable int rc_idx) {
 		Map<String, Object> response = new HashMap<String, Object>();
@@ -153,8 +175,17 @@ public class RecruitController {
 				logger.info("prj_idx : {}", prj_idx);
 				Integer contest_idx = mapper.selectContestIdxByPrjIdx(prj_idx);
 				if(contest_idx != null) {
-					response.put("contest", contest_idx);
-					logger.info("contest_idx that was taken by prj_idx : {}", contest_idx);					
+					logger.info("contest_idx that was taken by prj_idx : {}", contest_idx);
+					
+					Contest contest = null;
+	                try {
+	                    contest = mapper.selectContestByContestIdx(contest_idx);
+	                    logger.info("contest that was taken by contest_idx : {}", contest.toString());
+	                    response.put("contest", contest);
+	                } catch (Exception e) {
+	                    logger.error("Error while fetching Contest by contest_idx: {}", contest_idx, e);
+	                    response.put("contest", null); // 또는 다른 오류 처리
+	                }
 				} else {
 					response.put("contest", null);
 				}

@@ -38,4 +38,3 @@
         DELETE FROM SCHEDULES WHERE SCHE_IDX = #{sche_idx}
     </delete>
 </mapper>
-

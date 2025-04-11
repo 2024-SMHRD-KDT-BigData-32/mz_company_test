@@ -1,5 +1,6 @@
 package com.smhrd.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +34,7 @@ public class UserController {
 	@GetMapping("/session-info")
 	public Map<String, Object> getSessionInfo(HttpSession session) {
 		Map<String, Object> response = new HashMap<String, Object>();
-		logger.info("Session ID: " + session.getId());
+//		logger.info("Session ID: " + session.getId());
 		String loggedInUserId = (String) session.getAttribute("loggedInUserId");
 		String loggedInUserNm = (String) session.getAttribute("loggedInUserNm");
 
@@ -151,5 +152,23 @@ public class UserController {
        return ResponseEntity.ok("Profile updated successfully");
    }
 
-
+   @PostMapping("/teamMate")
+   public Map<String, Object> getTeamMates(@RequestBody Map<String, Object> data){
+       Map<String, Object> response = new HashMap<String, Object>();
+       Integer prj_idx = (Integer) data.get("prj_idx");
+       List<User> userList = new ArrayList<User>();
+       try {
+           String user_id = userMapper.selectUserIdByPrjIdx(prj_idx);
+           userList.add(userMapper.selectUserById(user_id));
+           List<String> userIdList = userMapper.selectUserIdByJoiningPrjIdx(prj_idx);
+           if (userIdList != null && !userIdList.isEmpty()) {
+               userList.addAll(userMapper.selectUsersByIds(userIdList));
+           }
+           logger.info("userList :  {}", userList);
+           response.put("userList", userList);
+       } catch (Exception e) {
+           logger.info("{}",e);
+       }
+       return response;
+   }
 }

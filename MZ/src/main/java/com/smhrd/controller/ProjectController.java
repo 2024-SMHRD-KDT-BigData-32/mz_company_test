@@ -1,5 +1,6 @@
 package com.smhrd.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,17 @@ public class ProjectController {
 	@PostMapping("/myList")
 	public List<Project> projectList(@RequestBody Map<String, String> paramMap) {
 		String userId = paramMap.get("user_id");
-		return mapper.projectList(userId);
+		List<Project> myPrjList = new ArrayList<Project>();
+		
+		try {
+			myPrjList.addAll(mapper.projectList(userId));
+			List<Integer> prjIdxList = mapper.selectPrjIdxsByJoiningUserId(userId);
+			myPrjList.addAll(mapper.selectPrjsByIdxs(prjIdxList));
+		} catch (Exception e) {
+			logger.info("{}", e);
+		}
+		
+		return myPrjList;
 	}
 	
 	

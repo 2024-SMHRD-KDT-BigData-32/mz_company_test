@@ -10,13 +10,11 @@ import lombok.NonNull;
 @NoArgsConstructor
 public class TechStack {
 	
+	private Integer stack_idx;	// PK(AUTO_INCREMENT)
+	
 	@NonNull
-	private Integer stack_idx;	
-
+	private String stack_type; // 
+	
 	@NonNull
-	private String stack_type;	
-
-	@NonNull
-	private String stack_nm;	
-
+	private String stack_nm;
 }

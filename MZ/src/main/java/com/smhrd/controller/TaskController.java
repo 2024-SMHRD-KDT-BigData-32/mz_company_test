@@ -48,15 +48,15 @@ public class TaskController {
 	@DeleteMapping("/delete/{task_idx}")
 	public ResponseEntity<String> deleteWork(@PathVariable("task_idx") int task_idx) {
 		try {
-			logger.info("ì¼ì • ì‚­ì œ: ID {}", task_idx);
+			logger.info("ÀÏÁ¤ »èÁ¦: ID {}", task_idx);
 			int result = mapper.deleteWork(task_idx);
 			if (result == 0) {
-				logger.warn("ì‚­ì œí•  ì¼ì •ì„ ì°¾ì„ ìˆ˜ ì—†ìŒ: ID {}", task_idx);
+				logger.warn("»èÁ¦ÇÒ ÀÏÁ¤À» Ã£À» ¼ö ¾øÀ½: ID {}", task_idx);
 				return new ResponseEntity<>("not found", HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<>("success", HttpStatus.OK);
 		} catch (Exception e) {
-			logger.error("ì¼ì • ì‚­ì œ ì‹¤íŒ¨: {}", e.getMessage());
+			logger.error("ÀÏÁ¤ »èÁ¦ ½ÇÆĞ: {}", e.getMessage());
 			return new ResponseEntity<>("error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -76,12 +76,12 @@ public class TaskController {
 	@PostMapping("/add")
 	public ResponseEntity<String> addWork(@RequestBody Task task) {
 		try {
-			logger.info("ì¼ì • ì¶”ê°€: {}", task);
+			logger.info("ÀÏÁ¤ Ãß°¡: {}", task);
 			int result = mapper.addWork(task);
-			logger.info("ì¼ì • ì¶”ê°€ ê²°ê³¼: {}", result);
+			logger.info("ÀÏÁ¤ Ãß°¡ °á°ú: {}", result);
 			return new ResponseEntity<>("success", HttpStatus.OK);
 		} catch (Exception e) {
-			logger.error("ì¼ì • ì¶”ê°€ ì‹¤íŒ¨: {}", e.getMessage());
+			logger.error("ÀÏÁ¤ Ãß°¡ ½ÇÆĞ: {}", e.getMessage());
 			return new ResponseEntity<>("error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

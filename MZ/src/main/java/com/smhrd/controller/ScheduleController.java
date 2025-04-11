@@ -40,12 +40,12 @@ public class ScheduleController {
 	@PostMapping("/add")
 	public ResponseEntity<String> addSchedule(@RequestBody Schedule schedule) {
 		try {
-			logger.info("ì¼ì • ì¶”ê°€: {}", schedule);
+			logger.info("ÀÏÁ¤ Ãß°¡: {}", schedule);
 			int result = mapper.insertSchedule(schedule);
-			logger.info("ì¼ì • ì¶”ê°€ ê²°ê³¼: {}", result);
+			logger.info("ÀÏÁ¤ Ãß°¡ °á°ú: {}", result);
 			return new ResponseEntity<>("success", HttpStatus.OK);
 		} catch (Exception e) {
-			logger.error("ì¼ì • ì¶”ê°€ ì‹¤íŒ¨: {}", e.getMessage());
+			logger.error("ÀÏÁ¤ Ãß°¡ ½ÇÆĞ: {}", e.getMessage());
 			return new ResponseEntity<>("error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -54,12 +54,12 @@ public class ScheduleController {
 	public ResponseEntity<String> updateSchedule(@PathVariable("sche_idx") int scheIdx,
 			@RequestBody Schedule schedule) {
 		try {
-			logger.info("ì¼ì • ìˆ˜ì •: {}, ID: {}", schedule, scheIdx);
+			logger.info("ÀÏÁ¤ ¼öÁ¤: {}, ID: {}", schedule, scheIdx);
 			schedule.setSche_idx(scheIdx);
 			mapper.updateSchedule(schedule);
 			return new ResponseEntity<>("success", HttpStatus.OK);
 		} catch (Exception e) {
-			logger.error("ì¼ì • ìˆ˜ì • ì‹¤íŒ¨: {}", e.getMessage());
+			logger.error("ÀÏÁ¤ ¼öÁ¤ ½ÇÆĞ: {}", e.getMessage());
 			return new ResponseEntity<>("error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
@@ -67,15 +67,15 @@ public class ScheduleController {
 	@DeleteMapping("/delete/{sche_idx}")
 	public ResponseEntity<String> deleteSchedule(@PathVariable("sche_idx") int scheIdx) {
 		try {
-			logger.info("ì¼ì • ì‚­ì œ: ID {}", scheIdx);
+			logger.info("ÀÏÁ¤ »èÁ¦: ID {}", scheIdx);
 			int result = mapper.deleteSchedule(scheIdx);
 			if (result == 0) {
-				logger.warn("ì‚­ì œí•  ì¼ì •ì„ ì°¾ì„ ìˆ˜ ì—†ìŒ: ID {}", scheIdx);
+				logger.warn("»èÁ¦ÇÒ ÀÏÁ¤À» Ã£À» ¼ö ¾øÀ½: ID {}", scheIdx);
 				return new ResponseEntity<>("not found", HttpStatus.NOT_FOUND);
 			}
 			return new ResponseEntity<>("success", HttpStatus.OK);
 		} catch (Exception e) {
-			logger.error("ì¼ì • ì‚­ì œ ì‹¤íŒ¨: {}", e.getMessage());
+			logger.error("ÀÏÁ¤ »èÁ¦ ½ÇÆĞ: {}", e.getMessage());
 			return new ResponseEntity<>("error: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}

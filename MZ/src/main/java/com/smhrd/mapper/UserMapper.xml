@@ -1,58 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smhrd.mapper.UserMapper">
-	
+
 	<select id="getUserByIdPw" resultType="com.smhrd.entity.User">
-		select * from USERS where USER_ID=#{user_id} and USER_PW=#{user_pw}
+		select * from USERS where
+		USER_ID=#{user_id} and USER_PW=#{user_pw}
 	</select>
 
 	<insert id="join" parameterType="com.smhrd.entity.User">
-		INSERT INTO USERS(user_id, user_pw, user_nm, user_birthdate, user_role) VALUES (#{user_id}, #{user_pw}, #{user_nm}, #{user_birthdate}, "팀원");
+		INSERT INTO USERS(user_id,
+		user_pw, user_nm, user_birthdate, user_role) VALUES (#{user_id},
+		#{user_pw}, #{user_nm}, #{user_birthdate}, "팀원");
 	</insert>
-	
+
 	<select id="select" resultType="com.smhrd.entity.User">
-		SELECT * FROM USERS WHERE USER_ID = #{user_id};
+		SELECT * FROM USERS WHERE USER_ID
+		= #{user_id};
+	</select>
+
+
+	<!-- 프로필 수정 부분 -->
+	<!-- 유저 정보 가져오기 -->
+	<select id="findUserById" resultType="com.smhrd.entity.User">
+		SELECT * FROM USERS WHERE USER_ID = #{user_id}
+	</select>
+
+	<!-- 유저 정보 수정 -->
+	<update id="updateUser">
+		UPDATE USERS
+		SET USER_NM = #{user_nm}
+		<if test="userPw != null and userPw != ''">
+			, USER_PW = #{user_pw}
+		</if>
+		WHERE USER_ID = #{user_id}
+	</update>
+
+	<!-- 유저 기술 스택 조회 -->
+	<select id="findStacksByUserId"
+		resultType="com.smhrd.entity.TechStack">
+		SELECT TS.STACK_IDX, TS.STACK_TYPE, TS.STACK_NM
+		FROM USER_STACKS US
+		JOIN TECH_STACKS TS ON US.STACK_IDX = TS.STACK_IDX
+		WHERE US.USER_ID = #{user_id}
+	</select>
+
+	<!-- 전체 기술 스택 -->
+	<select id="findAllStacks"
+		resultType="com.smhrd.entity.TechStack">
+		SELECT * FROM TECH_STACKS
+	</select>
+
+	<!-- 기술 스택 삭제 -->
+	<delete id="deleteStacksByUserId">
+		DELETE FROM USER_STACKS WHERE USER_ID = #{user_id}
+	</delete>
+
+	<!-- 기술 스택 추가 -->
+	<insert id="insertUserStack">
+		INSERT INTO USER_STACKS (USER_ID, STACK_IDX)
+		VALUES (#{user_id}, #{stack_idx})
+	</insert>
+
+	<select id="selectUserIdByPrjIdx"
+		parameterType="java.lang.Integer" resultType="java.lang.String">
+		select user_id from
+		PROJECTS where prj_idx=#{prj_idx}
+	</select>
+
+	<select id="selectUserById" parameterType="java.lang.String"
+		resultType="com.smhrd.entity.User">
+		select * from USERS where user_id=#{user_id}
+	</select>
+
+	<select id="selectUserIdByJoiningPrjIdx" parameterType="Integer"
+		resultType="java.lang.String">
+		select user_id from JOININGS where prj_idx=#{prj_idx} and
+		approval_yn='Y'
 	</select>
 	
-	
-	<!-- 프로필 수정 부분 -->
-	    <!-- 유저 정보 가져오기 -->
-    <select id="findUserById" resultType="String">
-        SELECT * FROM USERS WHERE USER_ID = #{user_id}
-    </select>
+	<select id="selectUsersByIds" parameterType="java.lang.String"
+		resultType="com.smhrd.entity.User">
+		SELECT * FROM USERS WHERE user_id IN
+		<foreach item="userId" collection="userIdList" open="("
+			separator="," close=")">
+			#{userId}
+		</foreach>
+	</select>
 
-    <!-- 유저 정보 수정 -->
-    <update id="updateUser">
-        UPDATE USERS
-        SET USER_NM = #{user_nm}
-        <if test="userPw != null and userPw != ''">
-            , USER_PW = #{user_pw}
-        </if>
-        WHERE USER_ID = #{user_id}
-    </update>
-
-    <!-- 유저 기술 스택 조회 -->
-    <select id="findStacksByUserId" resultType="com.smhrd.entity.TechStack">
-        SELECT TS.STACK_IDX, TS.STACK_TYPE, TS.STACK_NM
-        FROM USER_STACKS US
-        JOIN TECH_STACKS TS ON US.STACK_IDX = TS.STACK_IDX
-        WHERE US.USER_ID = #{user_id}
-    </select>
-
-    <!-- 전체 기술 스택 -->
-    <select id="findAllStacks" resultType="com.smhrd.entity.TechStack">
-        SELECT * FROM TECH_STACKS
-    </select>
-
-    <!-- 기술 스택 삭제 -->
-    <delete id="deleteStacksByUserId">
-        DELETE FROM USER_STACKS WHERE USER_ID = #{user_id}
-    </delete>
-
-    <!-- 기술 스택 추가 -->
-    <insert id="insertUserStack">
-        INSERT INTO USER_STACKS (USER_ID, STACK_IDX)
-        VALUES (#{user_id}, #{stack_idx})
-    </insert>
-	
 </mapper>
