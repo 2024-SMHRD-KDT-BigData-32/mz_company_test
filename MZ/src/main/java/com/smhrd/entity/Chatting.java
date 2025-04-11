@@ -5,12 +5,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
+
 import java.sql.Timestamp;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Data
+@ToString
 public class Chatting {
     
     private Integer chat_idx; // 대화 식별자
@@ -27,6 +30,8 @@ public class Chatting {
     private String chat_file; // 대화 파일
     
     private Timestamp created_at; // 대화 시간
+    
+    private String file_url;  // 파일 경로
     
     // 메시지 타입 필드 추가
     private String messageType; // ENTER, QUIT, TALK

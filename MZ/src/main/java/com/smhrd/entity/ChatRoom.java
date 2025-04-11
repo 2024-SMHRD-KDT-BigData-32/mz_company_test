@@ -35,4 +35,11 @@ public class ChatRoom {
 
     @NonNull
     private String croom_status; // �� ����
+    
+    // 메시지 타입 상수 정의
+    public static class MessageType {
+        public static final String ENTER = "ENTER";
+        public static final String QUIT = "QUIT";
+        public static final String TALK = "TALK";
+    }
 }
