@@ -14,25 +14,32 @@ import java.sql.Timestamp;
 public class ChatRoom {
 
 	@NonNull
-    private Integer croomIdx; // ╧Ф ╫д╨╟юз
+    private Integer croomIdx; // О©╫О©╫ О©╫д╨О©╫О©╫О©╫
 
     @NonNull
-    private Integer prjIdx; // га╥на╖ф╝ ╫д╨╟юз
+    private Integer prjIdx; // О©╫О©╫О©╫О©╫О©╫О©╫ф╝ О©╫д╨О©╫О©╫О©╫
 
     @NonNull
-    private String croomTitle; // ╧Ф а╕╦Я
+    private String croomTitle; // О©╫О©╫ О©╫О©╫О©╫О©╫
 
     @NonNull
-    private String croomDesc; // ╧Ф ╪р╟Ё
+    private String croomDesc; // О©╫О©╫ О©╫р╟О©╫
 
-    private Timestamp openedAt; // ╧Ф ╟Ё╪Ёюоюз
-
-    @NonNull
-    private Integer croomLimit; // ╧Ф юн©Ь╪Ж
+    private Timestamp openedAt; // О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
 
     @NonNull
-    private String userId; // ╧Ф ╟Ё╪Ёюз
+    private Integer croomLimit; // О©╫О©╫ О©╫н©О©╫О©╫О©╫
 
     @NonNull
-    private String croomStatus; // ╧Ф ╩Себ
+    private String userId; // О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
+
+    @NonNull
+    private String croom_status; // О©╫О©╫ О©╫О©╫О©╫О©╫
+    
+    // К╘■Л▀°Л╖─ М┐─Л·┘ Л┐│Л┬≤ Л═∙Л²≤
+    public static class MessageType {
+        public static final String ENTER = "ENTER";
+        public static final String QUIT = "QUIT";
+        public static final String TALK = "TALK";
+    }
 }

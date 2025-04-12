@@ -29,6 +29,7 @@
 	
 	<beans:bean id="chatHandler" class="com.smhrd.handler.WebSocketChatHandler"></beans:bean>
   	<beans:bean id="objectMapper" class="com.fasterxml.jackson.databind.ObjectMapper"/>
+	
 	<websocket:handlers>
     <!-- 웹소켓 요청(주소)을 처리할 bean 지정 -->
     <websocket:mapping handler="chatHandler" path="/websocket/chat" />
@@ -38,4 +39,10 @@
     </websocket:handshake-interceptors>
     </websocket:handlers>
     
+    <!-- 파일 전송을 위한 MultipartResolver 설정 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="5242880" /> <beans:property name="maxUploadSizePerFile" value="5242880" /> 
+		<beans:property name="maxInMemorySize" value="10240" /> 
+	</beans:bean>
+
 </beans:beans>

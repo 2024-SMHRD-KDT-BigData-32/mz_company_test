@@ -1,9 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.smhrd.mapper.ChattingMapper">
-	<select id="chattingList" resultType="com.smhrd.entity.Chatting">
-		SELECT * FROM CHATTINGS;
-	</select>
 
-	
+    <select id="chatList" parameterType="int" resultType="com.smhrd.entity.Chatting">
+        SELECT *
+        FROM CHATTINGS
+        WHERE CROOM_IDX = #{prj_idx} </select>
+
+    <insert id="messageSave" parameterType="com.smhrd.entity.Chatting">
+        INSERT INTO CHATTINGS (
+            CHAT_IDX, CROOM_IDX, CHATTER, CHAT_CONTENT, CHAT_EMOTICON, CHAT_FILE, CREATED_AT, FILE_URL
+        )
+        VALUES (
+            #{chat_idx}, #{croom_idx}, #{chatter}, <if test="chat_content != null">#{chat_content}</if>
+            <if test="chat_content == null">NULL</if>,
+            <if test="chat_emoticon != null">#{chat_emoticon}</if>
+            <if test="chat_emoticon == null">NULL</if>,
+            <if test="chat_file != null">#{chat_file}</if>
+            <if test="chat_file == null">NULL</if>,
+            NOW(),
+            <if test="file_url != null">#{file_url}</if>
+            <if test="file_url == null">NULL</if>
+        );
+    </insert>
+
+    <insert id="insertChatFile" parameterType="com.smhrd.entity.Chatting">
+        INSERT INTO CHATTINGS (CROOM_IDX, CHATTER, CHAT_FILE, CREATED_AT, FILE_URL)
+        VALUES (#{croom_idx}, #{chatter}, #{chat_file}, #{created_at}, #{file_url}) </insert>
+
+    <select id="findFilesByPrjIdx" parameterType="map" resultType="com.smhrd.entity.Chatting">
+        SELECT CHAT_IDX, CROOM_IDX, CHATTER, CHAT_CONTENT, CHAT_FILE, CREATED_AT, FILE_URL
+        FROM CHATTINGS
+        WHERE CROOM_IDX = #{prj_idx} AND CHAT_FILE IS NOT NULL
+        ORDER BY CREATED_AT DESC
+    </select>
+
 </mapper>
