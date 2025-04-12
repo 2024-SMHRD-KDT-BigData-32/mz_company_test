@@ -14,24 +14,24 @@ import java.sql.Timestamp;
 public class ChatRoom {
 
 	@NonNull
-    private Integer croomIdx; // �� �ĺ���
+    private Integer croom_idx; // �� �ĺ���
 
     @NonNull
-    private Integer prjIdx; // ������Ʈ �ĺ���
+    private Integer prj_idx; // ������Ʈ �ĺ���
 
     @NonNull
-    private String croomTitle; // �� ����
+    private String croom_title; // �� ����
 
     @NonNull
-    private String croomDesc; // �� �Ұ�
+    private String croom_desc; // �� �Ұ�
 
-    private Timestamp openedAt; // �� ��������
-
-    @NonNull
-    private Integer croomLimit; // �� �ο���
+    private Timestamp opened_at; // �� ��������
 
     @NonNull
-    private String userId; // �� ������
+    private Integer croom_limit; // �� �ο���
+
+    @NonNull
+    private String user_id; // �� ������
 
     @NonNull
     private String croom_status; // �� ����
