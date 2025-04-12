@@ -8,7 +8,7 @@
 	
 
 	<select id="getPrjList" resultType="com.smhrd.entity.Project">
-		select * from PROJECTS
+		SELECT * FROM PROJECTS
 	</select>
 	
 	<insert id="createPrj" parameterType="com.smhrd.entity.Project">
@@ -25,7 +25,7 @@
 	</select>
 	
 	<select id="selectPrjsByIdxs" resultType="com.smhrd.entity.Project">
-		SELECT * FROM PROJECTS WHERE prj_idx IN
+		SELECT * FROM PROJECTS WHERE prj_idx IN 
 		<foreach item="prj_idx" collection="prjIdxList" open="("
 			separator="," close=")">
 			#{prj_idx}
