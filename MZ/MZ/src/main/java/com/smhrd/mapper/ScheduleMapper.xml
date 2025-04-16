@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smhrd.mapper.ScheduleMapper">
+	
+	<select id="scheduleList" parameterType="String" resultType="com.smhrd.entity.Schedule">
+        SELECT * FROM SCHEDULES	WHERE PRJ_IDX = #{prj_idx}
+    </select>
+    
+    <insert id="insertSchedule" parameterType="com.smhrd.entity.Schedule">
+        <!-- 시퀀스 사용 예시 (DB에 맞게 수정 필요) -->
+
+        INSERT INTO SCHEDULES (
+            SCHE_IDX, PRJ_IDX, SCHE_NM, SCHE_DESC, 
+            ST_DT, ED_DT, SCHE_STATUS, SCHE_COLOR,
+            CREATED_AT, UPDATED_AT
+        ) VALUES (
+            #{sche_idx}, #{prj_idx}, #{sche_nm}, #{sche_desc}, 
+            #{st_dt}, #{ed_dt}, #{sche_status}, #{sche_color},
+            NOW(), NOW()
+        )
+
+    </insert>
+        
+    <update id="updateSchedule" parameterType="com.smhrd.entity.Schedule">
+        UPDATE SCHEDULES 
+        SET 
+        <if test="sche_nm != null">SCHE_NM = #{sche_nm},</if>
+        <if test="sche_desc != null">SCHE_DESC = #{sche_desc},</if>
+        <if test="st_dt != null">ST_DT = #{st_dt},</if>
+        <if test="ed_dt != null">ED_DT = #{ed_dt},</if>
+        <if test="sche_status != null">SCHE_STATUS = #{sche_status},</if>
+        <if test="sche_color != null">SCHE_COLOR = #{sche_color},</if>
+            UPDATED_AT = NOW()
+        WHERE SCHE_IDX = #{sche_idx}
+    </update>
+    
+    <delete id="deleteSchedule" parameterType="int">
+        DELETE FROM SCHEDULES WHERE SCHE_IDX = #{sche_idx}
+    </delete>
+</mapper>
